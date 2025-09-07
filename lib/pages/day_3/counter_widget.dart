@@ -14,7 +14,7 @@ class CounterWidget extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        const Text('You have pushed the button this many times:'),
+        const Text('You have pushed the button this many times'),
         Text(
           '$count',
           style: Theme.of(context).textTheme.headlineMedium,
