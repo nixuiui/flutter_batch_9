@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_batch_9/pages/day_3/counter_widget.dart';
+import 'package:flutter_batch_9/pages/day_3/article_card_widget.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -26,10 +26,15 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Center(
-        child: CounterWidget(
-          count: _counter,
-        ),
+      body: ListView(
+        padding: const EdgeInsets.all(16.0),
+        children: [
+          ArticleCardWidget(),
+          const SizedBox(height: 16),
+          ArticleCardWidget(),
+          const SizedBox(height: 16),
+          ArticleCardWidget(),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
