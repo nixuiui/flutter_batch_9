@@ -19,15 +19,35 @@ class _ExpandedPageState extends State<ExpandedPage> {
           Container(
             height: 100,
             color: Colors.red,
-            child: const Center(
-              child: Text(
-                'Container Widget',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+            child: Row(
+              children: [
+                Expanded(
+                  child: const Center(
+                    child: Text(
+                      'Container Widget',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
+                Container(
+                  width: 100,
+                  color: Colors.purple,
+                  child: const Center(
+                    child: Text(
+                      'Box',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           Expanded(
