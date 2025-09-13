@@ -76,7 +76,7 @@ class _FootballPlayersPageState extends State<FootballPlayersPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ListView'),
+        title: const Text('Football Players'),
       ),
       body: ListView.builder(
         itemCount: footballPlayers.length,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_batch_9/pages/day_5/football_player_detail_page.dart';
 import 'package:flutter_batch_9/pages/day_5/football_players_page.dart';
+import 'package:flutter_batch_9/pages/day_5/main_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,8 +17,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.light(useMaterial3: true),
       darkTheme: ThemeData.dark(useMaterial3: true),
       themeMode: ThemeMode.dark,
-      initialRoute: '/football-player-page',
+      initialRoute: '/main',
       routes: {
+        '/main': (context) => const MainPage(),
         '/football-player-page': (context) => const FootballPlayersPage(),
         // Remove the detail page from routes if you want to pass data via Navigator
       },
