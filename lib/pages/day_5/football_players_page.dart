@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_batch_9/pages/day_5/football_player_detail_page.dart';
 
 class FootballPlayersPage extends StatefulWidget {
   const FootballPlayersPage({super.key});
@@ -91,16 +90,22 @@ class _FootballPlayersPageState extends State<FootballPlayersPage> {
             subtitle: Text(e['club']!),
             trailing: const Icon(Icons.arrow_forward_ios),
             onTap: () async {
-              final result = await Navigator.push(context, MaterialPageRoute(
-                builder: (context) => FootballPlayerDetailPage(
-                  playerName: e['name']!, 
-                  clubName: e['club']!
-                ),
-              ));
+              // final result = await Navigator.push(context, MaterialPageRoute(
+              //   builder: (context) => FootballPlayerDetailPage(
+              //     playerName: e['name']!, 
+              //     clubName: e['club']!
+              //   ),
+              // ));
+              final result = await Navigator.pushNamed(
+                context, 
+                '/football-player-detail-page', 
+                arguments: e
+              );
               if(result != null) {
+                final res = result as Map<String, dynamic>;
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text(result['liked'] == true ? 'You liked ${e['name']}' : 'You disliked ${e['name']}'),
+                    content: Text(res['liked'] == true ? 'You liked ${e['name']}' : 'You disliked ${e['name']}'),
                     duration: const Duration(seconds: 2),
                   )
                 );
