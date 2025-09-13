@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_batch_9/pages/day_4/gridview_count_page.dart';
+import 'package:flutter_batch_9/pages/day_5/football_players_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.light(useMaterial3: true),
       darkTheme: ThemeData.dark(useMaterial3: true),
       themeMode: ThemeMode.dark,
-      home: GridCountPage(),
+      home: FootballPlayersPage(),
     );
   }
 }
