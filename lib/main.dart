@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_batch_9/pages/day_5/football_player_detail_page.dart';
 import 'package:flutter_batch_9/pages/day_5/football_players_page.dart';
-import 'package:flutter_batch_9/pages/day_5/main_page.dart';
+import 'package:flutter_batch_9/pages/day_6/main_page.dart';
 
 void main() {
   runApp(const MyApp());

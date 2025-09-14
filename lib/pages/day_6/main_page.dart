@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_batch_9/pages/day_5/football_clubs_page.dart';
 import 'package:flutter_batch_9/pages/day_5/football_players_page.dart';
+import 'package:flutter_batch_9/pages/day_6/counter_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -19,6 +20,7 @@ class _MainPageState extends State<MainPage> {
       body: [
         FootballPlayersPage(),
         FootballClubsPage(),
+        CounterPage(),
       ][index],
       bottomNavigationBar: NavigationBar(
         selectedIndex: index,
@@ -35,6 +37,10 @@ class _MainPageState extends State<MainPage> {
           NavigationDestination(
             icon: Icon(Icons.shield),
             label: 'Clubs'
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.add),
+            label: 'Counter'
           ),
         ],
       ),
