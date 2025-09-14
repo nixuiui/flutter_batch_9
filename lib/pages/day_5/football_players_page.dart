@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_batch_9/pages/day_6/bloc/favorite_player_cubit.dart';
+import 'package:flutter_batch_9/pages/day_6/bloc/favorite_player_state.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FootballPlayersPage extends StatefulWidget {
   const FootballPlayersPage({super.key});
@@ -82,35 +85,51 @@ class _FootballPlayersPageState extends State<FootballPlayersPage> {
         itemCount: footballPlayers.length,
         itemBuilder: (context, index) {
           final e = footballPlayers[index];
-          return ListTile(
-            leading: CircleAvatar(
-              child: Text(e['name']![0]),
-            ),
-            title: Text(e['name']!),
-            subtitle: Text(e['club']!),
-            trailing: const Icon(Icons.arrow_forward_ios),
-            onTap: () async {
-              // final result = await Navigator.push(context, MaterialPageRoute(
-              //   builder: (context) => FootballPlayerDetailPage(
-              //     playerName: e['name']!, 
-              //     clubName: e['club']!
-              //   ),
-              // ));
-              final result = await Navigator.pushNamed(
-                context, 
-                '/football-player-detail-page', 
-                arguments: e
+          return BlocBuilder<FavoritePlayerCubit, FavoritePlayerState?>(
+            builder: (context, state) {
+              return ListTile(
+                leading: CircleAvatar(
+                  child: Text(e['name']![0]),
+                ),
+                title: Text(e['name']!),
+                subtitle: Text(e['club']!),
+                trailing: Icon(
+                  state?.playerNames?.contains(e['name']) == true  ? Icons.favorite : Icons.favorite_border,
+                  color: state?.playerNames?.contains(e['name']) == true 
+                    ? Colors.red 
+                    : Colors.grey,
+                ),
+                onLongPress: () {
+                  if(state?.playerNames?.contains(e['name']) == true) {
+                    context.read<FavoritePlayerCubit>().removeFromFavorites(e['name'] ?? '');
+                  } else {
+                    context.read<FavoritePlayerCubit>().addToFavorites(e['name'] ?? '');
+                  }
+                },
+                onTap: () async {
+                  // final result = await Navigator.push(context, MaterialPageRoute(
+                  //   builder: (context) => FootballPlayerDetailPage(
+                  //     playerName: e['name']!, 
+                  //     clubName: e['club']!
+                  //   ),
+                  // ));
+                  final result = await Navigator.pushNamed(
+                    context, 
+                    '/football-player-detail-page', 
+                    arguments: e
+                  );
+                  if(result != null) {
+                    final res = result as Map<String, dynamic>;
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(res['liked'] == true ? 'You liked ${e['name']}' : 'You disliked ${e['name']}'),
+                        duration: const Duration(seconds: 2),
+                      )
+                    );
+                  }
+                },
               );
-              if(result != null) {
-                final res = result as Map<String, dynamic>;
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(res['liked'] == true ? 'You liked ${e['name']}' : 'You disliked ${e['name']}'),
-                    duration: const Duration(seconds: 2),
-                  )
-                );
-              }
-            },
+            }
           );
         }
       )

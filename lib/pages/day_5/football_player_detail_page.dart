@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_batch_9/pages/day_6/bloc/favorite_player_cubit.dart';
+import 'package:flutter_batch_9/pages/day_6/bloc/favorite_player_state.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FootballPlayerDetailPage extends StatefulWidget {
 
@@ -17,6 +20,28 @@ class _FootballPlayerDetailPageState extends State<FootballPlayerDetailPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Football Player Detail'),
+        actions: [
+          BlocBuilder<FavoritePlayerCubit, FavoritePlayerState?>(
+            builder: (context, state) {
+              final isFavorite = state?.playerNames?.contains(widget.playerName) == true;
+              return IconButton(
+                icon: Icon(
+                  isFavorite  ? Icons.favorite : Icons.favorite_border,
+                  color: isFavorite
+                    ? Colors.red
+                    : Colors.grey,
+                ),
+                onPressed: () {
+                  if(isFavorite) {
+                    context.read<FavoritePlayerCubit>().removeFromFavorites(widget.playerName);
+                  } else {
+                    context.read<FavoritePlayerCubit>().addToFavorites(widget.playerName);
+                  }
+                }, 
+              );
+            }
+          )
+        ],
       ),
       body: Center(
         child: Column(

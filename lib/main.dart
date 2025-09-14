@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_batch_9/pages/day_5/football_player_detail_page.dart';
 import 'package:flutter_batch_9/pages/day_5/football_players_page.dart';
+import 'package:flutter_batch_9/pages/day_6/bloc/favorite_player_cubit.dart';
 import 'package:flutter_batch_9/pages/day_6/bloc/theme_cubit.dart';
 import 'package:flutter_batch_9/pages/day_6/main_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,8 +15,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ThemeCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<ThemeCubit>(
+          create: (context) => ThemeCubit(),
+        ),
+        BlocProvider<FavoritePlayerCubit>(
+          create: (context) => FavoritePlayerCubit(),
+        ),
+      ],
       child: BlocBuilder<ThemeCubit, ThemeMode>(
         builder: (context, themeMode) {
           return MaterialApp(
