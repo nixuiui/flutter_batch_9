@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_batch_9/pages/day_6/bloc/theme_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FootballClubsPage extends StatefulWidget {
   const FootballClubsPage({super.key});
@@ -63,6 +65,18 @@ class _FootballClubsPageState extends State<FootballClubsPage> {
               Tab(text: 'By Division'),
             ],
           ),
+          actions: [
+            BlocBuilder<ThemeCubit, ThemeMode>(
+              builder: (context, themeMode) {
+                return Switch(
+                  value: themeMode == ThemeMode.dark,
+                  onChanged: (value) {
+                    context.read<ThemeCubit>().toggleTheme();
+                  }
+                );
+              }
+            )
+          ],
         ),
         body: TabBarView(
           children: [

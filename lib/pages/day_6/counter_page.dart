@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_batch_9/pages/day_6/bloc/counter_cubit.dart';
+import 'package:flutter_batch_9/pages/day_6/bloc/theme_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CounterPage extends StatefulWidget {
@@ -29,13 +30,30 @@ class _CounterPageState extends State<CounterPage> {
         appBar: AppBar(
           title: const Text('Counter Page'),
         ),
-        body: BlocBuilder<CounterCubit, int>(
-          bloc: counterCubit,
-          builder: (context, state) {
-            return Center(
-              child: Text('Counter Value: $state'),
-            );
-          }
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            BlocBuilder<CounterCubit, int>(
+              bloc: counterCubit,
+              builder: (context, state) {
+                return Center(
+                  child: Text('Counter Value: $state'),
+                );
+              }
+            ),
+            SizedBox(height: 20),
+            BlocBuilder<ThemeCubit, ThemeMode>(
+              builder: (context, themeMode) {
+                return Switch(
+                  value: themeMode == ThemeMode.dark,
+                  onChanged: (value) {
+                    context.read<ThemeCubit>().toggleTheme();
+                  }
+                );
+              }
+            )
+          ],
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: counterCubit.increment,
