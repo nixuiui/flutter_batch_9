@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_batch_9/pages/day_6/bloc/theme_cubit.dart';
 import 'package:flutter_batch_9/pages/day_7/data/database/app_database.dart';
 import 'package:flutter_batch_9/pages/day_7/data/database/product_db.dart';
 import 'package:flutter_batch_9/pages/day_7/pages/product_form_page.dart';
 import 'package:flutter_batch_9/pages/singleton.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
@@ -37,6 +39,16 @@ class _ProductPageState extends State<ProductPage> {
       appBar: AppBar(
         title: const Text('Product Page'),
         actions: [
+          IconButton(
+            onPressed: () {
+              context.read<ThemeCubit>().toggleTheme();
+            },
+            icon: Icon(
+              context.watch<ThemeCubit>().state == ThemeMode.light
+                  ? Icons.dark_mode
+                  : Icons.light_mode,
+            ),
+          ),
           IconButton(
             icon: const Icon(Icons.add),
             onPressed: () {

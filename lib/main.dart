@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_batch_9/pages/day_5/football_player_detail_page.dart';
 import 'package:flutter_batch_9/pages/day_6/bloc/favorite_player_cubit.dart';
 import 'package:flutter_batch_9/pages/day_6/bloc/theme_cubit.dart';
+import 'package:flutter_batch_9/pages/day_7/data/local_storage/theme_local_storage.dart';
 import 'package:flutter_batch_9/pages/day_7/pages/product_page.dart';
 import 'package:flutter_batch_9/pages/singleton.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<ThemeCubit>(
-          create: (context) => ThemeCubit(),
+          create: (context) => ThemeCubit(ThemeLocalStorage(getIt()))..loadTheme(),
         ),
         BlocProvider<FavoritePlayerCubit>(
           create: (context) => FavoritePlayerCubit(),
